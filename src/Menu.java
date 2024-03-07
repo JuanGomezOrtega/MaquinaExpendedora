@@ -15,6 +15,7 @@ public class Menu {
 		int n = -1;
 		Scanner sc = new Scanner (System.in);
 		
+		
 		while (n != 0) {
 			System.out.println("Bienvenido al intefez de administrador");
 			System.out.println("Pulse 1 para Insertar Productos");
@@ -29,11 +30,11 @@ public class Menu {
 			
 			switch (n) {
 				case 1:
-					System.out.println("Ingrese el id del producto que quiere modificar");
-					int id = sc.nextInt();
+					System.out.println("Ingrese el nombre o la posición del producto que quiere modificar");
+					String nombre = sc.nextLine();
 					System.out.println("Ingrese la cantidad del producto que quiere añadir");
 					int cantidad = sc.nextInt();
-					listaProductos.anadirUnidades(id, cantidad);
+					listaProductos.anadirUnidades(nombre, cantidad);
 					break;
 				case 2:
 					System.out.println("Ingrese el valor de la Moneda que quiere añadir");
@@ -50,8 +51,10 @@ public class Menu {
 					break;
 				case 5:
 					listaProductos.listadoGanancias();
+					break;
 				case 0: 
 					System.out.println("Gracias por utilizar la aplicación");
+					break;
 				default: 
 					System.out.println("Numero incorrecto");
 				
@@ -73,6 +76,7 @@ public class Menu {
 			System.out.println("Pulse 1 para Seleccionar Producto");
 			System.out.println("Pulse 2 para Insertar Monedas");
 			System.out.println("Pulse 3 para la devolución de su importe");
+			System.out.println("Pulse 4 para ver el listado de productos");
 			System.out.println("Pulse 0 para Salir");
 			
 			n = sc.nextInt();
@@ -117,8 +121,12 @@ public class Menu {
 					auxMonedas.devolucionMonedas();
 					auxMonedas.getListaMoneda().clear();
 					break;
+				case 4:
+					this.listaProductos.listadoProductosUsuario();
+					break;
 				case 0: 
 					System.out.println("Gracias por utilizar la aplicación");
+					break;
 				default: 
 					System.out.println("Numero incorrecto");
 				
@@ -148,20 +156,20 @@ public class Menu {
 	
 	public void devolucionOptimo(double importe) {
 		System.out.println("Devolucion de :");
-		while(importe != 0) 
+		 
+	
+		for(int i = 0; i< this.listaMonedas.getListaMoneda().size();) 
 		{
-			for(int i = 0; i< this.listaMonedas.getListaMoneda().size();) 
+			if(importe-this.listaMonedas.getListaMoneda().get(i).getValor()>=0 && this.listaMonedas.getListaMoneda().get(i).getCantidad()>0) 
 			{
-				if(importe-this.listaMonedas.getListaMoneda().get(i).getValor()>=0 && this.listaMonedas.getListaMoneda().get(i).getCantidad()>0) 
-				{
-					importe -= this.listaMonedas.getListaMoneda().get(i).getValor();
-					this.listaMonedas.getListaMoneda().get(i).setCantidad(this.listaMonedas.getListaMoneda().get(i).getCantidad()-1);
-					System.out.println(this.listaMonedas.getListaMoneda().get(i).getValor());
-				}else
-					i++;
-			}
-		
+				importe -= this.listaMonedas.getListaMoneda().get(i).getValor();
+				this.listaMonedas.getListaMoneda().get(i).setCantidad(this.listaMonedas.getListaMoneda().get(i).getCantidad()-1);
+				System.out.println(this.listaMonedas.getListaMoneda().get(i).getValor());
+			}else
+				i++;
 		}
+		
+		
 	}
 	
 	public void rellenar() {

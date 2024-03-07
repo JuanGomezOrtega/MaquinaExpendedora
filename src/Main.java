@@ -6,25 +6,28 @@ public class Main {
 		
 		Menu m = new Menu();
 		m.rellenar();
+		int n = 0;
 		
-		String pass = "";
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Si eres administrador pulsa 1, en caso contrario pulsa 0");
-		int n = sc.nextInt();
-		sc.nextLine();
-		
-		if(n == 0) {
-			m.inicioMenuUser();
-		}else if(n == 1) {
-			System.out.print("Ingrese la contraseña");
-			pass = sc.nextLine();
+		while(n <= 0) {
 			
-			if(pass.equals("D2315A"))
-				m.inicioMenuAdmin();
-		}else
-			System.out.print("Código incorrecto");
+			String pass = "";
+			Scanner sc = new Scanner(System.in);
+			System.out.print("Si eres administrador pulsa 1, en caso contrario pulsa 0");
+			n = sc.nextInt();
+			sc.nextLine();
 			
-		
+			if(n == 0) {
+				m.inicioMenuUser();
+			}else if(n == 1) {
+				System.out.print("Ingrese la contraseña");
+				pass = sc.nextLine();
+				
+				if(pass.equals("D2315A"))
+					m.inicioMenuAdmin();
+			}else
+				System.out.print("Código incorrecto");
+			
+		}
 		/*
 		Moneda m = new Moneda(1);
 		Monedas m1= new Monedas();

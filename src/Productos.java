@@ -25,6 +25,20 @@ public class Productos {
 		return "Producto inexistente";
 		
 	}
+	public String anadirUnidades(String s, int cantidad) {
+		for(Producto p: listaProducto) 
+		{
+			if(p.getNombre().toUpperCase().equals(s.toUpperCase())||p.getPosicion().toUpperCase().equals(s.toUpperCase())) 
+			{
+				p.setCantidad(p.getCantidad()+cantidad);
+				return "Cantidad actualizada correctamente";
+			}
+			
+		}
+		
+		return "Producto inexistente";
+		
+	}
 	
 	public void listadoProductos() {
 		for(Producto p : listaProducto)
@@ -33,19 +47,29 @@ public class Productos {
 		}
 	}
 	
+	public void listadoProductosUsuario() {
+		for(Producto p : listaProducto)
+		{
+			System.out.println("Producto: " + p.getNombre() + " Posicion: " + p.getPosicion());
+		}
+	}
+	
 	
 	
 	public void listadoGanancias() {
+		
+		double resultado; 
 		for(Producto p : listaProducto)
 		{
-			System.out.println("Producto: " + p.getNombre() + " Ganacia por producto: " + (p.getPrecioVenta()-p.getPrecioCompra()));
+			resultado = p.getPrecioVenta()-p.getPrecioCompra();
+			System.out.println("Producto: " + p.getNombre() + " Ganacia por producto: " + Math.round(resultado * 100.0) / 100.0);
 		}
 	}
 	
 	public Producto seleccionProducto(String opcion) {
 		for(Producto p : listaProducto)
 		{
-			if(p.getNombre().equals(opcion)||p.getPosicion().equals(opcion)) 
+			if(p.getNombre().toUpperCase().equals(opcion.toUpperCase())||p.getPosicion().toUpperCase().equals(opcion.toUpperCase())) 
 			{
 				return p;
 			}
